@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jorge Ben Jor - Projeto Consciência Negra</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(-45deg, #0d0d0d, #222, #111, #1a1a1a);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .slider-container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 2rem;
+    }
+
+    .slide {
+      position: absolute;
+      width: 85%;
+      max-width: 900px;
+      background: rgba(0,0,0,0.7);
+      padding: 2rem 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.6s ease;
+      z-index: 0;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 1;
+    }
+
+    h1 {
+      color: #FFD700;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      color: #ffcc00;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    p, li {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    ul {
+      list-style: disc;
+      margin-left: 1.5rem;
+    }
+
+    .nav-buttons {
+      position: absolute;
+      bottom: 2rem;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4rem;
+    }
+
+    .nav-buttons button {
+      background-color: #FFD700;
+      color: #111;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .nav-buttons button:hover {
+      background-color: #ff9900;
+      transform: scale(1.05);
+    }
+
+    .video-links {
+      margin-top: 1rem;
+    }
+
+    a {
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      color: #1e90ff;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .slide {
+        padding: 1.5rem;
+      }
+      .nav-buttons {
+        padding: 0 2rem;
+      }
+      .nav-buttons button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slider-container">
+    <div class="slide active">
+      <h1>JORGE BEN JOR</h1>
+      <h2>Projeto Consciência Negra</h2>
+      <p>Nome: [Seu nome aqui]</p>
+    </div>
+
+    <div class="slide">
+      <h2>Introdução</h2>
+      <p>Jorge Ben Jor é um dos mais importantes músicos brasileiros, responsável por criar um estilo único que mistura samba, rock, funk, bossa nova e ritmos africanos.</p>
+    </div>
+
+    <div class="slide">
+      <h2>Início da Carreira</h2>
+      <ul>
+        <li>Jorge Duílio Lima Menezes, nascido em 1945 no Rio</li>
+        <li>Começou nos anos 60 com muito estilo</li>
+        <li>Estourou com “Mas Que Nada” em 1963</li>
+        <li>Criador do samba-rock, ninguém fez igual</li>
+      </ul>
+    </div>
+
+    <div class="slide">
+      <h2>Contribuições Musicais</h2>
+      <ul>
+        <li>Fundiu ritmos africanos e brasileiros com funk e rock</li>
+        <li>Hits: “País Tropical”, “W/Brasil”, “Taj Mahal”, “Chove Chuva”</li>
+        <li>Influenciou movimentos como a Tropicália</li>
+        <li>Artistas gringos também gravaram suas músicas</li>
+      </ul>
+    </div>
+
+    <div class="slide">
+      <h2>Legado e Cultura</h2>
+      <ul>
+        <li>Deu palco e voz à cultura afro-brasileira</li>
+        <li>Letras que exaltam identidade, fé e cotidiano</li>
+        <li>Levou a MPB pro mundo, com estilo e presença</li>
+      </ul>
+    </div>
+
+    <div class="slide">
+      <h2>Conclusão</h2>
+      <p>Jorge Ben Jor mostra que música é resistência e orgulho. Ele revolucionou a cultura brasileira e elevou o som negro com talento e ousadia.</p>
+      <div class="video-links">
+        <p>Assista também:</p>
+        <p><a href="https://youtu.be/tihuetXMG8U" target="_blank">Versão Oficial</a></p>
+        <p><a href="https://youtu.be/VwBk24mHv_0" target="_blank">Versão AMV</a></p>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button onclick="prevSlide()">← Anterior</button>
+      <button onclick="nextSlide()">Próximo →</button>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+      });
+      slides[index].classList.add('active');
+    }
+
+    function nextSlide() {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }
+
+    function prevSlide() {
+      current = (current - 1 + slides.length) % slides.length;
+      showSlide(current);
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+  </script>
+</body>
+</html>
