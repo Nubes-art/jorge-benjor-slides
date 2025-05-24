@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jorge Ben Jor - Projeto Consciência Negra</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap');
+    
     * {
       margin: 0;
       padding: 0;
@@ -12,18 +14,46 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(-45deg, #0d0d0d, #222, #111, #1a1a1a);
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(-45deg, #0a0a0a, #1a0d0d, #0d1a0d, #0d0d1a, #1a1a0a);
       background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
+      animation: gradientBG 20s ease infinite;
       color: #fff;
       overflow: hidden;
+      height: 100vh;
     }
 
     @keyframes gradientBG {
       0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
+      25% {background-position: 100% 50%;}
+      50% {background-position: 100% 100%;}
+      75% {background-position: 0% 100%;}
       100% {background-position: 0% 50%;}
+    }
+
+    /* Partículas flutuantes */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      background: radial-gradient(circle, #FFD700, transparent);
+      border-radius: 50%;
+      animation: float 15s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
     }
 
     .slider-container {
@@ -33,49 +63,145 @@
       justify-content: center;
       position: relative;
       padding: 2rem;
+      z-index: 1;
     }
 
     .slide {
       position: absolute;
-      width: 85%;
-      max-width: 900px;
-      background: rgba(0,0,0,0.7);
-      padding: 2rem 2.5rem;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+      width: 90%;
+      max-width: 1000px;
+      background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(20,20,20,0.8));
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,215,0,0.3);
+      padding: 3rem;
+      border-radius: 25px;
+      box-shadow: 
+        0 0 30px rgba(255,215,0,0.2),
+        inset 0 0 30px rgba(255,215,0,0.05);
       opacity: 0;
-      transform: scale(0.95);
-      transition: all 0.6s ease;
+      transform: scale(0.9) rotateY(90deg);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       z-index: 0;
     }
 
     .slide.active {
       opacity: 1;
-      transform: scale(1);
+      transform: scale(1) rotateY(0deg);
       z-index: 1;
     }
 
+    .slide.prev {
+      transform: scale(0.9) rotateY(-90deg);
+    }
+
+    .slide.next {
+      transform: scale(0.9) rotateY(90deg);
+    }
+
     h1 {
+      font-family: 'Bebas Neue', cursive;
       color: #FFD700;
-      font-size: 2.5rem;
+      font-size: 4rem;
       margin-bottom: 0.5rem;
       text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 
+        0 0 10px #FFD700,
+        0 0 20px #FFD700,
+        0 0 30px #FFD700;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700; }
+      to { text-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700; }
     }
 
     h2 {
+      font-family: 'Bebas Neue', cursive;
       color: #ffcc00;
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 3px solid #FFD700;
+      padding-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      color: #cccccc;
+      font-weight: 300;
+      letter-spacing: 1px;
     }
 
     p, li {
-      font-size: 1.2rem;
-      line-height: 1.6;
+      font-size: 1.3rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      font-weight: 400;
     }
 
     ul {
-      list-style: disc;
-      margin-left: 1.5rem;
+      list-style: none;
+      margin-left: 0;
+    }
+
+    li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li::before {
+      content: '♪';
+      position: absolute;
+      left: 0;
+      color: #FFD700;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .highlight {
+      background: linear-gradient(90deg, #FFD700, #ff9900);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+
+    /* Progress bar */
+    .progress-container {
+      position: absolute;
+      top: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 4px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #FFD700, #ff9900);
+      border-radius: 2px;
+      transition: width 0.8s ease;
+      box-shadow: 0 0 10px #FFD700;
+    }
+
+    /* Slide counter */
+    .slide-counter {
+      position: absolute;
+      top: 3rem;
+      right: 3rem;
+      background: rgba(0,0,0,0.7);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      border: 1px solid #FFD700;
+      font-weight: bold;
+      color: #FFD700;
     }
 
     .nav-buttons {
@@ -84,108 +210,216 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 0 4rem;
     }
 
     .nav-buttons button {
-      background-color: #FFD700;
+      background: linear-gradient(135deg, #FFD700, #ff9900);
       color: #111;
       border: none;
-      padding: 1rem 2rem;
-      font-size: 1.1rem;
+      padding: 1.2rem 2.5rem;
+      font-size: 1.2rem;
       font-weight: bold;
-      border-radius: 10px;
+      border-radius: 15px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 0 10px #000;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .nav-buttons button:hover {
-      background-color: #ff9900;
-      transform: scale(1.05);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(255,215,0,0.4);
     }
+
+    .nav-buttons button:active {
+      transform: translateY(-1px) scale(1.02);
+    }
+
+
 
     .video-links {
-      margin-top: 1rem;
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: rgba(255,215,0,0.1);
+      border-radius: 15px;
+      border: 1px solid rgba(255,215,0,0.3);
     }
 
-    a {
-      color: #00bfff;
+    .video-links h3 {
+      color: #FFD700;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .video-link {
+      display: inline-block;
+      margin: 0.5rem 1rem 0.5rem 0;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(135deg, #ff4444, #cc0000);
+      color: white;
       text-decoration: none;
+      border-radius: 10px;
       font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
     }
 
-    a:hover {
-      color: #1e90ff;
-      text-decoration: underline;
+    .video-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255,68,68,0.4);
+      color: white;
+      text-decoration: none;
     }
 
-    @media (max-width: 600px) {
+    /* Responsividade */
+    @media (max-width: 768px) {
       .slide {
-        padding: 1.5rem;
+        padding: 2rem;
+        width: 95%;
       }
+      
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 2rem; }
+      p, li { font-size: 1.1rem; }
+      
       .nav-buttons {
         padding: 0 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
       }
+      
       .nav-buttons button {
-        padding: 0.8rem 1.5rem;
+        padding: 1rem 2rem;
         font-size: 1rem;
+      }
+      
+      .slide-counter {
+        top: 1rem;
+        right: 1rem;
+      }
+    }
+
+    /* Animações de entrada para os elementos */
+    .slide.active h1,
+    .slide.active h2,
+    .slide.active p,
+    .slide.active li {
+      animation: slideInUp 0.6s ease forwards;
+    }
+
+    .slide.active h2 { animation-delay: 0.2s; }
+    .slide.active p { animation-delay: 0.4s; }
+    .slide.active li:nth-child(1) { animation-delay: 0.6s; }
+    .slide.active li:nth-child(2) { animation-delay: 0.8s; }
+    .slide.active li:nth-child(3) { animation-delay: 1s; }
+    .slide.active li:nth-child(4) { animation-delay: 1.2s; }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
   </style>
 </head>
 <body>
+  <!-- Partículas flutuantes -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Barra de progresso -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Contador de slides -->
+  <div class="slide-counter">
+    <span id="currentSlide">1</span> / <span id="totalSlides">7</span>
+  </div>
+
   <div class="slider-container">
+    <!-- Slide 1: Título -->
     <div class="slide active">
       <h1>JORGE BEN JOR</h1>
-      <h2>Projeto Consciência Negra</h2>
-      <p>Nome: Guilherme Augusto</p>
+      <p class="subtitle">Um Ícone da Música Brasileira e da Consciência Negra</p>
+      <p style="margin-top: 2rem; font-size: 1.1rem;">
+        <strong>Projeto apresentado por:</strong> <span class="highlight">Guilherme Augusto</span>
+      </p>
+      <p style="font-size: 1rem; color: #aaa; margin-top: 1rem;">
+        Use as setas do teclado ou os botões abaixo para navegar
+      </p>
     </div>
 
+    <!-- Slide 2: Introdução -->
     <div class="slide">
-      <h2>Introdução</h2>
-      <p>Jorge Ben Jor é um dos mais importantes músicos brasileiros, responsável por criar um estilo único que mistura samba, rock, funk, bossa nova e ritmos africanos.</p>
+      <h2>Quem é Jorge Ben Jor?</h2>
+      <p>Jorge Ben Jor é muito mais que um músico - ele é um <span class="highlight">revolucionário cultural</span> que transformou a música brasileira para sempre.</p>
+      <p>Criador de um estilo único, ele soube misturar <span class="highlight">samba, rock, funk, bossa nova e ritmos africanos</span> de uma forma que ninguém havia feito antes.</p>
+      <p>Sua música não apenas entretém, mas também <span class="highlight">celebra e fortalece a identidade afro-brasileira</span>, sendo uma voz poderosa na luta contra o preconceito e pela valorização da cultura negra.</p>
     </div>
 
+    <!-- Slide 3: Origens e Início -->
     <div class="slide">
-      <h2>Início da Carreira</h2>
+      <h2>Das Origens ao Estrelato</h2>
       <ul>
-        <li>Jorge Duílio Lima Menezes, nascido em 1945 no Rio</li>
-        <li>Começou nos anos 60 com muito estilo</li>
-        <li>Estourou com “Mas Que Nada” em 1963</li>
-        <li>Criador do samba-rock, ninguém fez igual</li>
+        <li><strong>Jorge Duílio Lima Menezes</strong> nasceu em 1945 no Rio de Janeiro, crescendo em um ambiente rico em diversidade cultural</li>
+        <li>Começou sua carreira nos anos 60, quando o Brasil vivia uma <span class="highlight">efervescência musical e cultural</span></li>
+        <li>Estourou mundialmente com <span class="highlight">"Mas Que Nada"</span> em 1963, uma música que se tornou símbolo do Brasil no exterior</li>
+        <li>Foi o <span class="highlight">criador do samba-rock</span>, um gênero totalmente novo que influenciou gerações de músicos</li>
       </ul>
     </div>
 
+    <!-- Slide 4: Inovações Musicais -->
     <div class="slide">
-      <h2>Contribuições Musicais</h2>
+      <h2>Revolução Musical</h2>
       <ul>
-        <li>Fundiu ritmos africanos e brasileiros com funk e rock</li>
-        <li>Hits: “País Tropical”, “W/Brasil”, “Taj Mahal”, “Chove Chuva”</li>
-        <li>Influenciou movimentos como a Tropicália</li>
-        <li>Artistas gringos também gravaram suas músicas</li>
+        <li><span class="highlight">Fundiu ritmos</span> africanos e brasileiros com funk e rock </li>
+        <li><strong>Sucessos atemporais:</strong> "País Tropical", "W/Brasil", "Taj Mahal", "Chove Chuva", "Fio Maravilha"</li>
+        <li>Influenciou diretamente movimentos como a <span class="highlight">Tropicália</span> e inspirou artistas do mundo inteiro</li>
+        <li>Suas músicas foram gravadas por <span class="highlight">artistas internacionais</span> famosos, levando a cultura brasileira para o mundo</li>
       </ul>
     </div>
 
+    <!-- Slide 5: Consciência e Representatividade -->
     <div class="slide">
-      <h2>Legado e Cultura</h2>
+      <h2>Consciência Negra na Música</h2>
       <ul>
-        <li>Deu palco e voz à cultura afro-brasileira</li>
-        <li>Letras que exaltam identidade, fé e cotidiano</li>
-        <li>Levou a MPB pro mundo, com estilo e presença</li>
+        <li>Deu <span class="highlight">visibilidade e protagonismo</span> à cultura afro-brasileira na música popular</li>
+        <li>Suas letras celebram a <span class="highlight">identidade negra, a espiritualidade e o cotidiano</span> do povo brasileiro</li>
+        <li>Quebrou barreiras raciais na indústria musical, <span class="highlight">abrindo caminhos</span> para outros artistas negros</li>
+        <li>Representa a <span class="highlight">resistência cultural</span> através da música, mostrando que arte é também forma de luta</li>
       </ul>
     </div>
 
+    <!-- Slide 6: Legado e Impacto -->
+    <div class="slide">
+      <h2>Um Legado Eterno</h2>
+      <p>Jorge Ben Jor provou que a música brasileira pode ser <span class="highlight">popular e sofisticada</span> ao mesmo tempo, nacional e internacional, tradicional e inovadora.</p>
+      <p>Ele mostrou ao mundo a <span class="highlight">riqueza da cultura afro-brasileira</span>, transformando nossa música em um patrimônio cultural reconhecido globalmente.</p>
+      <p>Sua obra continua inspirando novos artistas e <span class="highlight">fortalecendo a consciência negra</span> através da arte, provando que música é resistência, identidade e orgulho.</p>
+    </div>
+
+    <!-- Slide 7: Conclusão -->
     <div class="slide">
       <h2>Conclusão</h2>
+      
       <p>Jorge Ben Jor mostra que música é resistência e orgulho. Ele revolucionou a cultura brasileira e elevou o som negro com talento e ousadia.</p>
+
       <div class="video-links">
-        <p>Assista também:</p>
-        <p><a href="https://youtu.be/tihuetXMG8U" target="_blank">Versão Oficial</a></p>
-        <p><a href="https://youtu.be/VwBk24mHv_0" target="_blank">Versão AMV</a></p>
+        <h3>🎵 Jorge Ben Jor:</h3>
+        <a href="https://youtu.be/tihuetXMG8U" target="_blank" class="video-link">🎬 Versão Original</a>
+        <a href="https://youtu.be/VwBk24mHv_0" target="_blank" class="video-link">🎭 Versão AMV</a>
       </div>
     </div>
 
+    <!-- Navegação -->
     <div class="nav-buttons">
       <button onclick="prevSlide()">← Anterior</button>
       <button onclick="nextSlide()">Próximo →</button>
@@ -194,28 +428,82 @@
 
   <script>
     const slides = document.querySelectorAll('.slide');
-    let current = 0;
+    const totalSlides = slides.length;
+    let currentSlide = 0;
 
+    // Criar partículas
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.width = Math.random() * 4 + 2 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Mostrar slide específico
     function showSlide(index) {
       slides.forEach((slide, i) => {
-        slide.classList.remove('active');
+        slide.classList.remove('active', 'prev', 'next');
+        if (i === index) {
+          slide.classList.add('active');
+        } else if (i < index) {
+          slide.classList.add('prev');
+        } else {
+          slide.classList.add('next');
+        }
       });
-      slides[index].classList.add('active');
+      
+      // Atualizar contador
+      document.getElementById('currentSlide').textContent = index + 1;
+      
+      // Atualizar barra de progresso
+      const progressPercent = ((index + 1) / totalSlides) * 100;
+      document.getElementById('progressBar').style.width = progressPercent + '%';
     }
 
+    // Próximo slide
     function nextSlide() {
-      current = (current + 1) % slides.length;
-      showSlide(current);
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
     }
 
+    // Slide anterior
     function prevSlide() {
-      current = (current - 1 + slides.length) % slides.length;
-      showSlide(current);
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(currentSlide);
     }
 
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
+    // Event listeners para navegação manual apenas
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+
+    // Clique em qualquer lugar para avançar
+    document.addEventListener('click', (e) => {
+      // Não avançar se clicar nos botões ou links
+      if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A') {
+        nextSlide();
+      }
+    });
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      document.getElementById('totalSlides').textContent = totalSlides;
+      showSlide(0);
     });
   </script>
 </body>
